@@ -183,6 +183,185 @@ The Subquery with WITH Clause utilizes Common Table Expressions (CTE) to simplif
 
   ![Complex Query Page](pictures/subquery_4.png "Set Operation Union Page")
 
+   ### **Advanced Aggregate Query** :
+
+  The Advanced Aggregate Query feature is designed to provide deeper insights into traffic and violation data using complex SQL aggregations
+
+  ![Complex Query Page](pictures/aaa_1.png "Set Operation Union Page")
+
+  - **Accidents by Severity(WITH ROLLUP):** Categorizes accidents by severity levels (e.g., Fatal, High, Low) and includes subtotals, aiding in understanding the distribution of accidents by severity.
+ 
+  ![Complex Query Page](pictures/aaa_2.png "Set Operation Union Page")
+
+  - **Average Fine Per Violation Type:** Lists the average fine amount for each type of violation. Useful for understanding which violations impose higher financial penalties.
+ 
+  ![Complex Query Page](pictures/aaa_3.png "Set Operation Union Page")
+ 
+  - **Running Total of Accidents Per Road:** Displays the daily accident count for each road and its cumulative total. This helps track trends and monitor accident hotspots over time.
+ 
+  ![Complex Query Page](pictures/aaa_4.png "Set Operation Union Page")
+
+  ### **OLAP Query** :
+
+  OLAP queries facilitate complex data analysis by slicing, dicing, and aggregating large datasets. 
+
+  ![Complex Query Page](pictures/olap_1.png "Set Operation Union Page")
+
+  - **Fine Ranking Per Vehicle:** This query ranks vehicles based on the fine amounts incurred. It provides a hierarchical ordering of fines for each vehicle.
+ 
+  ![Complex Query Page](pictures/olap_2.png "Set Operation Union Page")
+
+  - **Percentage Contribution of Accidents:** This query calculates the percentage contribution of accidents for each road, highlighting roads with the highest accident shares.
+    
+  ![Complex Query Page](pictures/olap_3.png "Set Operation Union Page")
+ 
+  - **Partitioned Sum of Fines:** This query groups violations by type and calculates the total fine for each violation category, offering an aggregate view of fines.
+ 
+  ![Complex Query Page](pictures/olap_4.png "Set Operation Union Page")
+
+## CRUD Operations
+
+  ### Create Functionality
+
+**Purpose:** The "Create" functionality allows users to add new records to the database through a simple and intuitive form interface.
+
+- **Steps** :
+
+   - The dashboard provides a dropdown menu for creating records in different tables such as Accident, Address, Vehicle, etc., making the system versatile and efficient.
+ 
+     ![Complex Query Page](pictures/create_1.png "Set Operation Union Page")
+
+  - The screenshot displays a form to create a new user record in the "User" table. Fields like Userid, Username, and Userrole are filled in, and clicking "Submit" adds the record to the database. It displays a message on the screen that the record has been successfully entered into the database.
+ 
+    ![Complex Query Page](pictures/create_2.png "Set Operation Union Page")
+
+    ![Complex Query Page](pictures/create_3.png "Set Operation Union Page")
+
+### Read Functionality
+
+**Purpose:** The Read Functionality allows users to view the records stored in the database for various entities like accidents, vehicles, users, and more.
+
+- **Steps** :
+
+   - Select a Table: The user is presented with a list of available tables (Accident, Address, Camera, etc.) to choose from.
+ 
+     ![Complex Query Page](pictures/read_1.png "Set Operation Union Page")
+
+  - Display Records: Once a table is selected, all the records from that table are displayed in a structured format with proper headers for clarity.
+ 
+  - User Table Example: As shown, the User table displays columns like UserID, UserName, and UserRole with all stored records visible. It also shows the record number 21 that we entered in the database.
+ 
+    ![Complex Query Page](pictures/read_2.png "Set Operation Union Page")
+
+    ![Complex Query Page](pictures/read_3.png "Set Operation Union Page")
+
+  ### Update Functionality
+
+  **Purpose:** The Update functionality allows users to modify existing records in the database through a simple interface.
+
+  - **Steps** :
+
+   - Select a Table to Update: From the dashboard, users can choose the "Update Record" option and select the desired table to modify.
+ 
+     ![Complex Query Page](pictures/update_1.png "Set Operation Union Page")
+
+  - Enter Record Details: The ID of the record to be updated is specified, The specific column to update (e.g., UserName, UserRole) is selected from a dropdown, The new value for the selected column is entered and click on Update Record. A success message is displayed confirming the record update.
+ 
+    ![Complex Query Page](pictures/update_2.png "Set Operation Union Page")
+
+    ![Complex Query Page](pictures/update_3.png "Set Operation Union Page")
+
+  - Check the database to view the updated record.
+ 
+    ![Complex Query Page](pictures/update_4.png "Set Operation Union Page")
+
+    ![Complex Query Page](pictures/update_5.png "Set Operation Union Page")
+
+    ### Delete Functionality
+
+    **Purpose:** The delete functionality in the Road Traffic Management System allows users to remove records from specific tables in the database.
+
+    - **Steps** :
+
+     - Users can navigate to the delete functionality by selecting the "Delete Record" option from the homepage dropdown. They can choose the specific table (e.g., User, Road, Violation) they want to delete records from.
+   
+       ![Complex Query Page](pictures/delete_1.png "Set Operation Union Page")
+
+    - Once a table is selected, a form appears where the user can input the Record ID of the item to be deleted.
+   
+      ![Complex Query Page](pictures/delete_2.png "Set Operation Union Page")
+
+    - After submitting the form, the system validates the input and deletes the corresponding record from the database. A success message confirms that the record was successfully removed, or an error message is displayed if the ID does not exist.
+   
+      ![Complex Query Page](pictures/delete_3.png "Set Operation Union Page")
+
+      ![Complex Query Page](pictures/delete_4.png "Set Operation Union Page")
+
+    - You can view record of the table to check if the record has been deleted or not. We can see that the record has been deleted from the database.
+   
+      ![Complex Query Page](pictures/delete_5.png "Set Operation Union Page")
+
+      ![Complex Query Page](pictures/delete_6.png "Set Operation Union Page")
+
+# Visualizations
+
+Bar chart, Pie chart and Bubble chart visualization is shown in our home page. The data is directly fetched from the database.
+
+### 1. Monthly Accidents and Violation Distribution
+
+![Complex Query Page](pictures/visualization_1.png "Set Operation Union Page")
+
+- **Bar Chart**: This chart showcases the total accidents for each month, helping identify patterns or spikes, such as increased accidents in January and November.
+  
+- **Pie Chart**: Highlights the distribution of different traffic violations, with each segment representing a specific type of violation (e.g., Speeding, DUI). This aids in determining the most common offenses.
+
+### 2. Accident Severity by Location
+
+![Complex Query Page](pictures/visualization_2.png "Set Operation Union Page")
+
+- **Bubble Chart**: Maps accident severity (x-axis) against the number of occurrences (y-axis) for different locations. Each bubble is color-coded for a specific street, making it easy to identify high-risk areas and accident severity trends.
+
+These visualizations provide actionable insights into accident trends and violation patterns, supporting better traffic management and policy-making.
+
+# Additional Pages
+
+### About Us
+
+The "About Us" page introduces the **Road Traffic Management System**, highlighting its mission and core values:
+
+- **Description:** This platform is dedicated to efficiently managing traffic-related data using innovative solutions and user-friendly interfaces.
+
+**Screenshot:**
+
+![Complex Query Page](pictures/ex.png "Set Operation Union Page")
+
+---
+
+### Our Services
+The "Our Services" page outlines the range of functionalities provided by the system:
+- **Accident and traffic data management**
+- **Real-time violation monitoring**
+- **Comprehensive road and camera system management**
+
+This page helps users understand the features offered and how they contribute to better traffic management.
+
+**Screenshot:**
+
+![Complex Query Page](pictures/ex_2.png "Set Operation Union Page")
+
+---
+
+### Contact Us
+The "Contact Us" page provides essential information for collaboration and support:
+- **Email:** `contact@roadtraffic.com`
+- **Phone:** `(555) 555-5555`
+
+Users can reach out for inquiries, technical assistance, or partnerships.
+
+**Screenshot:**
+
+![Complex Query Page](pictures/ex_3.png "Set Operation Union Page")
+  
 # Demonstration 🎥
 
 Watch the full functionality demonstration of the application on Loom: [Loom Video Link](https://www.loom.com/share/6b41b306782e41f09bffb00cc8938c67?sid=f8cf1368-185c-40a1-b0b9-8c94b6a5aa6c)
