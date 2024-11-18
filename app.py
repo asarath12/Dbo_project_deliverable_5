@@ -186,15 +186,6 @@ def set_comparison_query():
         flash(f"Error executing set comparison query: {str(e)}", "danger")
         return redirect(url_for('queries'))
 
-# Route for Subquery with CTE
-# @app.route('/subquery_with_clause')
-# def subquery_with_clause():
-#     try:
-#         results = db.subquery_with_clause()
-#         return render_template('subquery_result.html', results=results)
-#     except Exception as e:
-#         flash(f"Error executing subquery with clause: {str(e)}", "danger")
-#         return redirect(url_for('queries'))
 @app.route('/subquery_with_total_fines')
 def subquery_with_total_fines():
     try:
