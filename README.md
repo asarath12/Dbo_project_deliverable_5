@@ -173,15 +173,15 @@ The Subquery with WITH Clause utilizes Common Table Expressions (CTE) to simplif
 
 - **Total Fines by Vehicle:** This page lists the total fines incurred by each vehicle. This data allows easy identification of vehicles with the highest fine amounts, useful for enforcement or compliance reviews.
 
-  ![Complex Query Page](pictures/subquery_2.png.png "Set Operation Union Page")
+![Complex Query Page](pictures/subquery_2.png "Set Operation Union Page")
 
-- **Total Fines by Vehicle:** This page lists the total fines incurred by each vehicle. This data allows easy identification of vehicles with the highest fine amounts, useful for enforcement or compliance reviews.
+- **Top 3 Roads with Most Accidents:** This page lists the total fines incurred by each vehicle. This data allows easy identification of vehicles with the highest fine amounts, useful for enforcement or compliance reviews.
 
-  ![Complex Query Page](pictures/subquery_3.png.png "Set Operation Union Page")
+  ![Complex Query Page](pictures/subquery_3.png "Set Operation Union Page")
 
-- **Total Fines by Vehicle:** This page lists the total fines incurred by each vehicle. This data allows easy identification of vehicles with the highest fine amounts, useful for enforcement or compliance reviews.
+- **Users and Vehicle Violations:** This page displays a detailed list of users along with their vehicle violations. This helps in understanding which users and vehicles are involved in specific violations and the fines associated.
 
-  ![Complex Query Page](pictures/subquery_4.png.png "Set Operation Union Page")
+  ![Complex Query Page](pictures/subquery_4.png "Set Operation Union Page")
 
 # Demonstration 🎥
 
