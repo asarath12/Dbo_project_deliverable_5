@@ -22,9 +22,16 @@
         <form method="post" action="{{ url_for('delete_record', table=table) }}">
             <div class="mb-3">
                 <label for="record_id" class="form-label">Record ID:</label>
-                <input type="text" class="form-control" id="record_id" name="record_id" required>
+                <input type="text" class="form-control" id="record_id" name="record_id" placeholder="Enter the Record ID" required>
             </div>
             <button type="submit" class="btn btn-danger">Delete Record</button>
         </form>
+
+        <!-- Helper Message -->
+        <div class="mt-4">
+            <p class="text-muted">
+                <strong>Note:</strong> Ensure the ID is correct. If the record does not exist, a detailed error message will be displayed.
+            </p>
+        </div>
     </div>
 {% endblock %}

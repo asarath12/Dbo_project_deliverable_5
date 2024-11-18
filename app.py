@@ -90,8 +90,6 @@ def read_records(table):
         # Fetch records and columns from the specified table
         records = db.read_record(table)
         columns = db.get_columns(table)
-        print("Records:", records)  # Debugging line
-        print("Columns:", columns)  # Debugging line
         return render_template('view_records.html', records=records, columns=columns, table=table)
     except Exception as e:
         flash(f"Error reading records from {table}: {str(e)}", "danger")
@@ -121,31 +119,34 @@ def update_record(table):
         flash(f"An error occurred while updating record: {str(e)}", "danger")
         return redirect(url_for('update_record', table=table))
 
-
-### 4. Delete Record Route
+#     return render_template('delete_record.html', table=table)
 # @app.route('/delete/<table>', methods=['GET', 'POST'])
 # def delete_record(table):
 #     if request.method == 'POST':
 #         record_id = request.form['record_id']
 #         try:
-#             # Call the delete_record method from DatabaseManager
+#             # Call the delete_record method from your DatabaseManager
 #             db.delete_record(table, record_id)
-#             flash(f"Record deleted successfully from {table}.", "success")
+#             flash(f"Record with ID {record_id} successfully deleted from '{table}'.", "success")
 #         except Exception as e:
-#             flash(f"Error deleting record: {str(e)}", "danger")
-#         return redirect(url_for('index'))
-
+#             flash(f"Failed to delete record with ID {record_id} from '{table}': {str(e)}", "danger")
+#         return redirect(url_for('delete_record', table=table))
 #     return render_template('delete_record.html', table=table)
 @app.route('/delete/<table>', methods=['GET', 'POST'])
 def delete_record(table):
     if request.method == 'POST':
         record_id = request.form['record_id']
         try:
-            # Call the delete_record method from your DatabaseManager
-            db.delete_record(table, record_id)
-            flash(f"Record with ID {record_id} successfully deleted from '{table}'.", "success")
+            # Check if the record exists before attempting deletion
+            record_exists = db.check_record_exists(table, record_id)
+            if not record_exists:
+                flash(f"Record with ID {record_id} does not exist in '{table}'.", "warning")
+            else:
+                # Call the delete_record method from your DatabaseManager
+                db.delete_record(table, record_id)
+                flash(f"Record with ID {record_id} successfully deleted from '{table}'.", "success")
         except Exception as e:
-            flash(f"Failed to delete record with ID {record_id} from '{table}': {str(e)}", "danger")
+            flash(f"An error occurred while deleting record with ID {record_id} from '{table}': {str(e)}", "danger")
         return redirect(url_for('delete_record', table=table))
     return render_template('delete_record.html', table=table)
 

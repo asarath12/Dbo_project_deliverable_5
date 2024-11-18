@@ -632,6 +632,22 @@ class DatabaseManager:
             return []
         finally:
             cursor.close()
+            
+    def check_record_exists(self, table, record_id):
+        """
+        Check if a record exists in the specified table with the given record_id.
+        """
+        query = f"SELECT 1 FROM {table} WHERE id = %s LIMIT 1;"
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute(query, (record_id,))
+            result = cursor.fetchone()
+            return result is not None
+        except Error as e:
+            print(f"Error checking record existence: {e}")
+            return False
+        finally:
+            cursor.close()
 
     def symmetric_difference_query(self):
         """
