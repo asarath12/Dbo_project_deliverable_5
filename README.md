@@ -86,15 +86,102 @@ python .\run.py
   - Use the Manage Records section to Create, View, Update, or Delete records.
   - Ensure proper IDs and values are provided for valid operations.
 
-## Screenshots of website 📸
+# Screenshots of website 📸
 
-### Home Page 
+## Home Page 
 
-![Home Page](images/home_page_1.png "Home Page")
+![Home Page](pictures/home_page_1.png "Home Page")
 
-![Home Page](images/home_page_2.png "Home Page")
+![Home Page](pictures/home_page_2.png "Home Page")
 
-![Home Page](images/home_page_3.png "Home Page")
+![Home Page](pictures/home_page_3.png "Home Page")
+
+## Complex Queries Page
+
+This section outlines the different complex SQL queries integrated into the application. Each query demonstrates advanced database functionality, and the outputs are displayed in a user-friendly interface.
+
+![Complex Query Page](pictures/complex_query_1.png "Complex Queries Page")
+
+### **Set Operation** :
+
+The following queries combine datasets using SQL set operations:
+
+![Complex Query Page](pictures/set_operation_1.png "Set Operation Page")
+
+  - **Union Query:** Combines results from two datasets, ensuring all distinct records from both datasets are included.
+
+  ![Complex Query Page](pictures/set_operation_union.png "Set Operation Union Page")
+  
+  - **Intersect Query:** Returns common records between datasets.
+    
+  ![Complex Query Page](pictures/set_operation_intersect.png "Set Operation Union Page")
+  
+  - **Except Query:** Displays records in one dataset but not the other.
+    
+  ![Complex Query Page](pictures/set_operation_except.png "Set Operation Union Page")
+  
+  - **Difference Query:** Calculates the absolute differences between two datasets.
+
+  ![Complex Query Page](pictures/set_operation_difference.png "Set Operation Union Page")
+  
+  - **Symmetric Difference Query:** Finds records in either dataset but not in both.
+
+  ![Complex Query Page](pictures/set_operation_symmetric_difference.png "Set Operation Union Page")
+
+  ### **Set Membership** :
+
+The Set Membership Query checks whether a specific VehicleID exists in both the accident and vehicleviolation tables. This query is particularly useful for identifying vehicles that are involved in both accidents and violations, allowing for targeted analysis or reporting.
+
+![Complex Query Page](pictures/set_membership.png "Set Operation Union Page")
+
+![Complex Query Page](pictures/set_membership_2.png "Set Operation Union Page")
+
+  - **Description of the Screenshot:**
+The screenshot demonstrates the result of the set membership query for VehicleID 200. The output states, "No," indicating that the vehicle is not present in both the accident and vehicleviolation tables.
+
+### **Set Comparison** :
+
+Set comparison queries allow us to analyze data relationships and extract insights by comparing records across various tables.
+
+![Complex Query Page](pictures/set_comparison_1.png "Set Operation Union Page")
+
+- **Vehicles with Multiple Violations:** This query lists all vehicles that have committed multiple violations, showing the total count of violations per vehicle.
+
+  ![Complex Query Page](pictures/set_comparison_2.png "Set Operation Union Page")
+
+- **Vehicles with No Violations:** This query displays vehicles that have no violations recorded. These vehicles are registered but have a clean record.
+
+  ![Complex Query Page](pictures/set_comparison_3.png "Set Operation Union Page")
+  
+- **Most Common Violation Types:** This query identifies and ranks the most frequent violation types along with their occurrence counts, helping to focus on major infraction areas.
+
+  ![Complex Query Page](pictures/set_comparison_4.png "Set Operation Union Page")
+  
+- **Vehicles in Both Accidents and Violations:** This query lists vehicles involved in both accidents and violations, signifying cases where the same vehicles have been repeatedly flagged.
+
+  ![Complex Query Page](pictures/set_comparison_5.png "Set Operation Union Page")
+  
+- **Vehicles in Only Accidents:** This query identifies vehicles that have been involved exclusively in accidents and have no recorded violations.
+
+  ![Complex Query Page](pictures/set_Comparison_6.png "Set Operation Union Page")
+
+  ### **Subquery with WITH clause** :
+
+The Subquery with WITH Clause utilizes Common Table Expressions (CTE) to simplify complex queries by breaking them into manageable parts.
+
+![Complex Query Page](pictures/subquery_1.png "Set Operation Union Page")
+
+- **Total Fines by Vehicle:** This page lists the total fines incurred by each vehicle. This data allows easy identification of vehicles with the highest fine amounts, useful for enforcement or compliance reviews.
+
+  ![Complex Query Page](pictures/subquery_2.png.png "Set Operation Union Page")
+
+- **Total Fines by Vehicle:** This page lists the total fines incurred by each vehicle. This data allows easy identification of vehicles with the highest fine amounts, useful for enforcement or compliance reviews.
+
+  ![Complex Query Page](pictures/subquery_3.png.png "Set Operation Union Page")
+
+- **Total Fines by Vehicle:** This page lists the total fines incurred by each vehicle. This data allows easy identification of vehicles with the highest fine amounts, useful for enforcement or compliance reviews.
+
+  ![Complex Query Page](pictures/subquery_4.png.png "Set Operation Union Page")
 
 # Demonstration 🎥
 
