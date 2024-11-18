@@ -119,32 +119,27 @@ def update_record(table):
         flash(f"An error occurred while updating record: {str(e)}", "danger")
         return redirect(url_for('update_record', table=table))
 
-#     return render_template('delete_record.html', table=table)
-# @app.route('/delete/<table>', methods=['GET', 'POST'])
-# def delete_record(table):
-#     if request.method == 'POST':
-#         record_id = request.form['record_id']
-#         try:
-#             # Call the delete_record method from your DatabaseManager
-#             db.delete_record(table, record_id)
-#             flash(f"Record with ID {record_id} successfully deleted from '{table}'.", "success")
-#         except Exception as e:
-#             flash(f"Failed to delete record with ID {record_id} from '{table}': {str(e)}", "danger")
-#         return redirect(url_for('delete_record', table=table))
-#     return render_template('delete_record.html', table=table)
 @app.route('/delete/<table>', methods=['GET', 'POST'])
 def delete_record(table):
     if request.method == 'POST':
         record_id = request.form['record_id']
         try:
+            # Debugging: Print inputs
+            print(f"Deleting record with ID {record_id} from table {table}")
+
             # Check if the record exists before attempting deletion
             record_exists = db.check_record_exists(table, record_id)
+            print(f"Record exists: {record_exists}")
+
             if not record_exists:
                 flash(f"Record with ID {record_id} does not exist in '{table}'.", "warning")
             else:
                 # Call the delete_record method from your DatabaseManager
-                db.delete_record(table, record_id)
-                flash(f"Record with ID {record_id} successfully deleted from '{table}'.", "success")
+                delete_success = db.delete_record(table, record_id)
+                if delete_success:
+                    flash(f"Record with ID {record_id} successfully deleted from '{table}'.", "success")
+                else:
+                    flash(f"Failed to delete record with ID {record_id} from '{table}'.", "danger")
         except Exception as e:
             flash(f"An error occurred while deleting record with ID {record_id} from '{table}': {str(e)}", "danger")
         return redirect(url_for('delete_record', table=table))

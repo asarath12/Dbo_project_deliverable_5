@@ -635,16 +635,40 @@ class DatabaseManager:
             
     def check_record_exists(self, table, record_id):
         """
-        Check if a record exists in the specified table with the given record_id.
+        Check if a record exists in the specified table with the given primary key(s).
         """
-        query = f"SELECT 1 FROM {table} WHERE id = %s LIMIT 1;"
+        primary_keys = {
+            "accident": "AccidentID",
+            "address": "AddressID",
+            "camera": "CameraID",
+            "phonenumber": "PhoneID",
+            "road": "RoadID",
+            "roadcamera": ("RoadID", "CameraID"),
+            "user": "UserID",
+            "vehicle": "VehicleID",
+            "vehicleviolation": ("VehicleID", "ViolationID"),
+            "violation": "ViolationID"
+        }
+
+        primary_key = primary_keys.get(table)
+
+        # Handle composite keys
+        if isinstance(primary_key, tuple):
+            where_clause = " AND ".join([f"{key} = %s" for key in primary_key])
+            query = f"SELECT COUNT(*) FROM {table} WHERE {where_clause};"
+            params = record_id
+        else:
+            where_clause = f"{primary_key} = %s"
+            query = f"SELECT COUNT(*) FROM {table} WHERE {where_clause};"
+            params = [record_id]
+
         try:
             cursor = self.connection.cursor()
-            cursor.execute(query, (record_id,))
+            cursor.execute(query, tuple(params))
             result = cursor.fetchone()
-            return result is not None
+            return result[0] > 0  # Returns True if count > 0
         except Error as e:
-            print(f"Error checking record existence: {e}")
+            print(f"Error checking record existence in {table}: {e}")
             return False
         finally:
             cursor.close()
