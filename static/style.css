@@ -1,0 +1,59 @@
+/* Base styles (light yellow theme) */
+body {
+    background-color: #fffbea; /* Light yellow */
+    color: #000000; /* Black text */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Style for dashboard cards */
+.dashboard-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+.dashboard-card:hover {
+    transform: scale(1.05);
+}
+
+/* Button Styling */
+.btn-primary, .btn-create, .btn-update, .btn-delete {
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+.btn-create:hover {
+    background-color: #28a745;
+}
+.btn-update:hover {
+    background-color: #ffc107;
+}
+.btn-delete:hover {
+    background-color: #dc3545;
+}
+
+/* Chart Styling */
+.chart-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Footer Styling */
+footer {
+    padding: 10px;
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

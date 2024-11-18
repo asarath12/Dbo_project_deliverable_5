@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Complex Queries</h1>
+    <p class="text-center mb-5">Select a query to run and explore detailed insights.</p>
+
+    <!-- Enhanced Queries Section -->
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="dropdown">
+                <button class="btn btn-primary btn-lg w-100 shadow-sm dropdown-toggle" type="button" id="setOperationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-database me-2"></i> Set Operations Query
+                </button>
+                <ul class="dropdown-menu w-100" aria-labelledby="setOperationsDropdown">
+                    <li><a class="dropdown-item" href="{{ url_for('union_query') }}">Union Query</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('intersect_query') }}">Intersect Query</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('except_query') }}">Except Query</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('difference_query') }}">Difference Query</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('symmetric_difference_query') }}">Symmetric Difference Query</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <a href="{{ url_for('set_membership_query') }}" class="btn btn-primary btn-lg w-100 shadow-sm">
+                <i class="fas fa-check-circle me-2"></i> Set Membership Query
+            </a>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="dropdown">
+                <button class="btn btn-primary btn-lg w-100 shadow-sm dropdown-toggle" type="button" id="setComparisonDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-chart-bar me-2"></i> Set Comparison Query
+                </button>
+                <ul class="dropdown-menu w-100" aria-labelledby="setComparisonDropdown">
+                    <li><a class="dropdown-item" href="{{ url_for('vehicles_with_multiple_violations') }}">Vehicles with Multiple Violations</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('vehicles_with_no_violations') }}">Vehicles with No Violations</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('most_common_violation_types') }}">Most Common Violation Types</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('vehicles_in_both_accidents_and_violations') }}">Vehicles in Both Accidents and Violations</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('vehicles_in_only_accidents') }}">Vehicles in Only Accidents</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="dropdown">
+                <button class="btn btn-primary btn-lg w-100 shadow-sm dropdown-toggle" type="button" id="subqueryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-project-diagram me-2"></i> Subquery with CTE
+                </button>
+                <ul class="dropdown-menu w-100" aria-labelledby="subqueryDropdown">
+                    <li><a class="dropdown-item" href="{{ url_for('subquery_with_total_fines') }}">Total Fines by Vehicle</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('top_3_roads_with_most_accidents') }}">Top 3 Roads with Most Accidents</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('users_and_vehicle_violations') }}">Users and Violations (Filtered by Fine)</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="dropdown">
+                <button class="btn btn-primary btn-lg w-100 shadow-sm dropdown-toggle" type="button" id="advancedAggregateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-calculator me-2"></i> Advanced Aggregate Query
+                </button>
+                <ul class="dropdown-menu w-100" aria-labelledby="advancedAggregateDropdown">
+                    <li><a class="dropdown-item" href="{{ url_for('advanced_aggregate_query') }}">Accidents by Severity (With ROLLUP)</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('average_fine_per_violation_type') }}">Average Fine Per Violation Type</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('running_total_accidents_per_road') }}">Running Total of Accidents Per Road</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="dropdown">
+                <button class="btn btn-primary btn-lg w-100 shadow-sm dropdown-toggle" type="button" id="olapDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-cube me-2"></i> OLAP Query
+                </button>
+                <ul class="dropdown-menu w-100" aria-labelledby="olapDropdown">
+                    <li><a class="dropdown-item" href="{{ url_for('olap_query') }}">Fine Ranking Per Vehicle</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('percentage_contribution_of_accidents') }}">Percentage Contribution of Accidents</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('partitioned_sum_of_fines') }}">Partitioned Sum of Fines</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add some custom styling -->
+<style>
+    h1 {
+        font-size: 2.5rem;
+        color: #333;
+    }
+
+    p {
+        font-size: 1.2rem;
+        color: #666;
+    }
+
+    .btn-lg {
+        font-size: 1rem;
+        padding: 15px 20px;
+        border-radius: 5px;
+    }
+
+    .btn-lg i {
+        font-size: 1.2rem;
+    }
+
+    .shadow-sm {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    .dropdown-menu {
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    .dropdown-item:hover {
+        background-color: #f8f9fa;
+        color: #007bff;
+    }
+</style>
+{% endblock %}

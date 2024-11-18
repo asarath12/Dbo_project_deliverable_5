@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Update Record in {{ table | capitalize }}</h2>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="mb-4">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Update Record Form -->
+        <form method="post" action="{{ url_for('update_record', table=table) }}">
+            <div class="mb-3">
+                <label for="record_id" class="form-label">Record ID:</label>
+                <input type="text" class="form-control" id="record_id" name="record_id" required>
+            </div>
+            <div class="mb-3">
+                <label for="column" class="form-label">Select Column to Update:</label>
+                <select class="form-control" id="column" name="column" required>
+                    {% for column in columns %}
+                        <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="new_value" class="form-label">New Value:</label>
+                <input type="text" class="form-control" id="new_value" name="new_value" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Record</button>
+        </form>
+    </div>
+{% endblock %}

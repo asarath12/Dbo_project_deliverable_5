@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Set Operations Results</h2>
+    <p class="text-center">This query fetches vehicles that are either involved in accidents or violations, but not both.</p>
+    
+    {% if results %}
+    <table class="table table-bordered table-striped mt-4">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">VehicleID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehicle in results %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ vehicle['VehicleID'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info mt-4 text-center">
+        No vehicles found for the specified query.
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .alert {
+        background-color: #f8f9fa;
+        color: #495057;
+        border: 1px solid #ced4da;
+    }
+</style>
+{% endblock %}

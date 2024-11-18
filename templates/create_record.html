@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Create Record in {{ table | capitalize }}</h2>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <div class="container mb-4">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Form to create a record -->
+    <form action="{{ url_for('create_record', table=table) }}" method="POST">
+        {% for column in columns %}
+            <div class="mb-3">
+                <label for="{{ column }}" class="form-label">{{ column | capitalize }}</label>
+                <input type="text" class="form-control" id="{{ column }}" name="{{ column }}" required>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+{% endblock %}

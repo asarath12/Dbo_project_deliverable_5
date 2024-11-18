@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center">Welcome to the Road Traffic Management System</h1>
+
+    <!-- Manage Records Section -->
+    <div class="text-center my-4">
+        <h3>Manage Records</h3>
+        <p>Create, view, update, delete records in various tables, and view complex query results</p>
+        <div class="d-flex justify-content-center">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-plus-circle"></i> Create Record
+                </button>
+                <ul class="dropdown-menu">
+                    {% for table in tables %}
+                        <li><a class="dropdown-item" href="{{ url_for('create_record', table=table) }}">{{ table.capitalize() }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <a href="{{ url_for('select_table') }}" class="btn btn-primary me-2">
+                <i class="fas fa-eye"></i> View Records
+            </a>
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-warning text-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-edit"></i> Update Record
+                </button>
+                <ul class="dropdown-menu">
+                    {% for table in tables %}
+                        <li><a class="dropdown-item" href="{{ url_for('update_record', table=table) }}">{{ table.capitalize() }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-trash-alt"></i> Delete Record
+                </button>
+                <ul class="dropdown-menu">
+                    {% for table in tables %}
+                        <li><a class="dropdown-item" href="{{ url_for('delete_record', table=table) }}">{{ table.capitalize() }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <a href="{{ url_for('queries') }}" class="btn btn-info ms-2">
+                <i class="fas fa-search"></i> Complex Queries
+            </a>
+        </div>
+    </div>
+
+    <!-- Counter Section -->
+    <div class="row text-center mt-4">
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h4>Total Accidents</h4>
+                <h2 id="accidentsCounter" data-target="{{ total_accidents }}">0</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h4>Total Vehicle Violations</h4>
+                <h2 id="violationsCounter" data-target="{{ total_violations }}">0</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h4>Cameras Operational</h4>
+                <h2 id="camerasCounter" data-target="{{ cameras_operational }}">0</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="row my-5">
+        <div class="col-md-6">
+            <canvas id="barChart"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="pieChart"></canvas>
+        </div>
+        <div class="col-md-12 mt-5">
+            <h5 class="text-center">Accidents Severity by Location</h5>
+            <canvas id="bubbleChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Counter Animation
+        function animateCounter(id) {
+            const counter = document.getElementById(id);
+            const target = parseInt(counter.getAttribute("data-target"), 10) || 0;
+            let count = 0;
+            const increment = Math.ceil(target / 100);
+            const updateCount = () => {
+                count += increment;
+                if (count < target) {
+                    counter.innerText = count;
+                    setTimeout(updateCount, 20);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        }
+
+        animateCounter("accidentsCounter");
+        animateCounter("violationsCounter");
+        animateCounter("camerasCounter");
+
+        // Bar Chart
+        const barChart = new Chart(document.getElementById("barChart").getContext("2d"), {
+            type: "bar",
+            data: {
+                labels: {{ monthly_accidents | tojson }},
+                datasets: [{
+                    label: "Accidents",
+                    data: {{ monthly_accidents_counts | tojson }},
+                    backgroundColor: "rgba(54, 162, 235, 0.6)",
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    borderWidth: 1,
+                }],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: "top" },
+                    title: { display: true, text: "Monthly Accidents" },
+                },
+                scales: { y: { beginAtZero: true } },
+            },
+        });
+
+        // Pie Chart
+        const pieChart = new Chart(document.getElementById("pieChart").getContext("2d"), {
+            type: "pie",
+            data: {
+                labels: {{ violation_distribution_labels | tojson }},
+                datasets: [{
+                    data: {{ violation_distribution_counts | tojson }},
+                    backgroundColor: [
+                        "#FF6384", "#FF9F40", "#FFCD56", "#4BC0C0",
+                        "#36A2EB", "#9966FF", "#C9CBCF", "#FF6B6B"
+                    ],
+                    borderColor: "#ffffff",
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: "top" },
+                    title: { display: true, text: "Violation Distribution" }
+                }
+            }
+        });
+
+        // Bubble Chart
+        const bubbleData = {
+            datasets: [
+                {% for row in bubble_chart_data %}
+                {
+                    label: "{{ row['road_name'] }}",
+                    data: [{ x: {{ row['x'] }}, y: {{ row['y'] }}, r: {{ row['r'] }} }],
+                    backgroundColor: getRandomColor(),
+                    borderColor: getRandomColor(),
+                    borderWidth: 1
+                },
+                {% endfor %}
+            ]
+        };
+
+        const bubbleOptions = {
+            responsive: true,
+            plugins: {
+                legend: { display: true, position: "top" },
+                title: { display: false, text: "Accidents Severity by Location" }
+            },
+            scales: {
+                x: { title: { display: true, text: "Severity" }, beginAtZero: true },
+                y: { title: { display: true, text: "Number of Accidents" }, beginAtZero: true }
+            }
+        };
+
+        const bubbleChart = new Chart(document.getElementById("bubbleChart").getContext("2d"), {
+            type: "bubble",
+            data: bubbleData,
+            options: bubbleOptions
+        });
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    });
+</script>
+{% endblock %}

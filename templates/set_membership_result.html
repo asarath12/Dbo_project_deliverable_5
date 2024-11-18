@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Set Membership Query Result</h2>
+    <form method="POST" action="{{ url_for('set_membership_query') }}">
+        <div class="form-group">
+            <label for="vehicle_id">Enter Vehicle ID:</label>
+            <input type="number" id="vehicle_id" name="vehicle_id" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Check Membership</button>
+    </form>
+    {% if result is not none %}
+        <div class="mt-4">
+            <p>Is vehicle ID {{ vehicle_id }} in both accident and vehicleviolation tables? <strong>{{ result }}</strong></p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

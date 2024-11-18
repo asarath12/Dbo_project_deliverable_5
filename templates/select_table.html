@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="text-center mb-4">Select a Table to View Records</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Available Tables</h5>
+                    <p class="card-text">Click on a table to view its records.</p>
+                    <div class="d-flex flex-wrap justify-content-center">
+                        {% for table in tables %}
+                            <a href="{{ url_for('read_records', table=table) }}" class="btn btn-outline-primary m-2">
+                                {{ table|capitalize }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
