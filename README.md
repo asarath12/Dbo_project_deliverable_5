@@ -185,4 +185,4 @@ The Subquery with WITH Clause utilizes Common Table Expressions (CTE) to simplif
 
 # Demonstration 🎥
 
-Watch the full functionality demonstration of the application on Loom: Loom Video Link
+Watch the full functionality demonstration of the application on Loom: [Loom Video Link](https://www.loom.com/share/6b41b306782e41f09bffb00cc8938c67?sid=f8cf1368-185c-40a1-b0b9-8c94b6a5aa6c)
